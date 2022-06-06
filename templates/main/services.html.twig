@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Solution - Free Responsive Agency Template using Bootstrap 4{% endblock %}
+
+{% block body %}
+    <main role="main">
+
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Tous les services</h1>
+                <image src="{{ asset('build/images/banner-img.png') }}" class="img-fluid" />
+            </div>
+        </section>
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="card-group">
+                        {% for service in services %}
+                            {% set path = 'build/images/'~ service.image %}
+                                <div class="card text-center" >
+                                    <div class="oval"><img class="img-thumbnail" src="{{ asset(path) }}" alt=""></div>
+                                    <div class="card-body">
+                                        <h3 class="card-title">{{ service.title }}</h3>
+                                        <p class="card-text">{{ service.text }}</p>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+    </main>
+
+
+
+
+{% endblock %}
