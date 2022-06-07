@@ -1,4 +1,5 @@
-
+src/.idea/*
+/.idea/*
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -23,5 +24,3 @@
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 
-src/.idea
-./idea
