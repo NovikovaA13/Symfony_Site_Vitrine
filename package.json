@@ -1,0 +1,31 @@
+{
+  "name": "solution1",
+  "version": "1.0.0",
+  "description": "Site en Symfony\r Solution - Free Responsive Agency Template using Bootstrap 4",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "encore dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://novikova_a@bitbucket.org/novikova_a/test_novikova.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/novikova_a/test_novikova#readme",
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.1",
+    "@symfony/stimulus-bridge": "^3.2.0",
+    "@symfony/webpack-encore": "^2.1.0",
+    "file-loader": "6.0.0"
+  }
+}

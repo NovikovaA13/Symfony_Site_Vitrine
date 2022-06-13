@@ -1,0 +1,32 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Commantaires{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="mt-2 mb-4">Commantaires</h1>
+        <div class="list-group mb-4">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Text</th>
+                    <th scope="col">Supprimer</th>
+                </tr>
+                </thead>
+                {% for comment in comments %}
+                    <tr>
+                        <td>{{ comment.id }}</td>
+                        <td>{{ comment.title }}</td>
+                        <td>{{ comment.email }}</td>
+                        <td>{{ comment.text }}</td>
+                        <td><a href={{ path('admin_stat_delete', {'id': comment.id }) }} class="link-danger">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

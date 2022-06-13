@@ -31,11 +31,11 @@ class MainController extends AbstractController
         return $this->render('main/index.html.twig', ['services' => $services, 'posts' => $posts, 'stats' => $stats, 'form' => $form->createView()]);
     }
     /**
-     * @Route("/page1", name="page1")
+     * @Route("/about", name="about")
      */
-    public function page1(): Response
+    public function about(): Response
     {
-        return $this->render('main/page1.html.twig');
+        return $this->render('main/about.html.twig');
     }
     /**
      * @Route("/services", name="all_services")
