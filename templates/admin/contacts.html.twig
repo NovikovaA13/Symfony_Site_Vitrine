@@ -1,11 +1,12 @@
-{% extends 'admin.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Commantaires{% endblock %}
+{% block title %}Contacts{% endblock %}
 
 {% block body %}
-
     <div class="container">
-        <h1 class="mt-2 mb-4">Commantaires</h1>
+        <div class="page-header text-center mt-3 mb-4">
+            <h1>Contacts</h1>
+        </div>
         <div class="list-group mb-4">
             <table class="table table-striped">
                 <thead>
@@ -17,13 +18,13 @@
                     <th scope="col">Supprimer</th>
                 </tr>
                 </thead>
-                {% for comment in comments %}
+                {% for contact in contacts %}
                     <tr>
-                        <td>{{ comment.id }}</td>
-                        <td>{{ comment.title }}</td>
-                        <td>{{ comment.email }}</td>
-                        <td>{{ comment.text }}</td>
-                        <td><a href={{ path('admin_stat_delete', {'id': comment.id }) }} class="link-danger">Supprimer</a></td>
+                        <td>{{ contact.id }}</td>
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td>{{ contact.text }}</td>
+                        <td><a href={{ path('admin_contact_delete', {'id': contact.id }) }} class="link-danger">Supprimer</a></td>
                     </tr>
                 {% endfor %}
             </table>

@@ -16,7 +16,13 @@
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <a href="{{ path('login') }}" class="btn btn-outline-dark my-2 my-sm-0 mr-3 text-uppercase">login</a>                </form>
+                    {% if not is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('login') }}" class="btn btn-outline-dark my-2 my-sm-0 mr-3 text-uppercase">login</a>
+                    {% else %}
+                        <a href="{{ path('admin_main') }}" class="btn btn-outline-dark my-2 my-sm-0 mr-3 text-uppercase">Admin menu</a>
+                        <a href="{{ path('logout') }}" class="btn btn-outline-dark my-2 my-sm-0 mr-3 text-uppercase">logout</a>
+                    {% endif %}
+                </form>
             </div>
         </div>
     </nav>
@@ -282,4 +288,5 @@
             </div>
         </div>
     </footer>
+
 {% endblock %}

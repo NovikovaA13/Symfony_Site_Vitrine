@@ -1,10 +1,52 @@
-{% extends 'admin.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Admin Menu{% endblock %}
 
 {% block body %}
 
 <div class="container">
+    <div class="page-header text-center mt-3 mb-4">
+        <h1>Admin Menu</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="jumbotron">
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{{ path('admin_services') }}">
+                        Services
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="jumbotron">
+                <p>
+                    <a class="btn btn-primary btn-lg" href="#">
+                        Articles et News
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="jumbotron">
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{{ path('admin_stats_view') }}">
+                        Statistiques
+                    </a>
+                </p>
+            </div>
+        </div>
 
+        <div class="col-sm-3">
+            <div class="jumbotron">
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{{ path('admin_contacts_view') }}">
+                         Contacts
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
+
 {% endblock %}
