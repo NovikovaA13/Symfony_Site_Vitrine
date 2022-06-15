@@ -216,7 +216,7 @@
                         <div class="card-body text-left pr-0 pl-0">
                             <h5>{{ post.title }}</h5>
                             <p class="card-text">{{ post.text | slice (0, 50) ~ "..." }}</p>
-                            <a href="#">READ MORE <i class="fa fa-angle-right" aria-hidden="true"></i></a></div>
+                            <a href="{{ path('post', {'id': post.id }) }}">READ MORE <i class="fa fa-angle-right" aria-hidden="true"></i></a></div>
                     </div>
                 </div>
                 {% endfor %}

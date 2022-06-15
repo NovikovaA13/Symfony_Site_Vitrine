@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+   <div class="container text-center">
+       <h1 class="mt-4 mb-4">{{ post.title }}</h1>
+       {% set path = 'build/images/'~ post.image %}
+       <image src="{{ asset(path) }}"  class="img-fluid"></image>
+        <p class="lead mt-4">{{ post.text }}</p>
+   </div>
+{% endblock %}

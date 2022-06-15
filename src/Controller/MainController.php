@@ -65,4 +65,12 @@ class MainController extends AbstractController
         return $this->redirectToRoute('index');
 
     }
+    /**
+     * @Route("/post/{id}", name="post")
+     */
+    public function post(int $id): Response
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
+        return $this->render('main/post.html.twig', ['post' => $post ]);
+    }
 }

@@ -33,7 +33,7 @@
                 loop:true,
                 autoplay:true,
                 center: false,
-                margin:30,
+                margin:0,
                 responsiveClass:true,
                 nav:true,
                 navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],

@@ -7,6 +7,7 @@ use App\Entity\Service;
 use App\Entity\Stats;
 use App\Form\ServiceType;
 use App\Form\StatsType;
+use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,21 +46,14 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
-                $originalFileName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFileName);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-                try {
-                    $imageFile->move($this->getParameter('images_directory'), $newFilename);
-                } catch (FileException $e){
-                    var_dump($e);
-                }
+                $newFilename = ImageUploader::upload($imageFile, $this->getParameter('images_directory'));
                 $service->setImage($newFilename);
 
             }
             $em = $this->getDoctrine()->getManager();
             $em->persist($service);
             $em->flush();
-            return $this->redirectToRoute('admin_edit_service', ['id' => $service->getId()]);
+            return $this->redirectToRoute('admin_services');
         }
         return $this->render('admin/add_service.html.twig', ['form' => $form->createView()]);
     }
@@ -74,27 +68,13 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
-                $originalFileName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFileName);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-                try {
-                    $imageFile->move($this->getParameter('images_directory'), $newFilename);
-                } catch (FileException $e){
-                    var_dump($e);
-                }
-                try {
-                    unlink('./build/images/'.$service->getImage());
-                } catch (Exception $ex) {
-                    var_dump($ex);
-
-                }
+                $newFilename = ImageUploader::upload($imageFile, $this->getParameter('images_directory'));
                 $service->setImage($newFilename);
-
             }
             $em = $this->getDoctrine()->getManager();
             $em->persist($service);
             $em->flush();
-            return $this->redirectToRoute('admin_edit_service', ['id' => $service->getId()]);
+            return $this->redirectToRoute('admin_services');
         }
         return $this->render('admin/edit_service.html.twig', ['form' => $form->createView()]);
     }
@@ -105,12 +85,8 @@ class AdminController extends AbstractController
     {
         $service = $this->getDoctrine()->getRepository(Service::class)->find($id);
         $em = $this->getDoctrine()->getManager();
-        try {
-            unlink('./build/images/'.$service->getImage());
-        } catch (Exception $ex) {
-            var_dump($ex);
+        ImageUploader::delete($service->getImage());
 
-        }
         $em->remove($service);
         $em->flush();
 
