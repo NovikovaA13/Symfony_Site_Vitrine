@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{% block title %}{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-    {% block javascripts %}
-        <script src="{{ asset('build/js/app.js') }}"></script>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/css/font-awesome.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/owl-carousel/assets/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/style.css') }}">
     {% endblock %}
-    <!--<script>
-        $(document).ready(function(){
-            $('.owl-carousel').owlCarousel();
-        });
-    </script>-->
+</head>
+<body>
+{% block body %}{% endblock %}
+</body>
+    {% block javascripts %}
+        <script src="{{ asset('build/js/jquery-3.3.1.slim.min.js') }}"></script>
+        <script src="{{ asset('build/js/popper.min.js') }}"></script>
+        <script src="{{ asset('build/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('build/owl-carousel/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('build/js/main.js') }}"></script>
+    {% endblock %}
 </html>
