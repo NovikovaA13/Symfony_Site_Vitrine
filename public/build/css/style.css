@@ -201,7 +201,7 @@ body {
   }
 }
 
-.gtco-banner-area a, .gtco-feature a, .gtco-features a, .gtco-news .owl-carousel .card a, #gtco-footer .submit-button {
+.gtco-banner-area a, .gtco-feature a, .gtco-features a, .gtco-news .owl-carousel .card a, #gtco-footer .submit-button{
   background-image: -moz-linear-gradient(0deg, #06c6f9 0%, #38eaf9 100%);
   background-image: -webkit-linear-gradient(0deg, #06c6f9 0%, #38eaf9 100%);
   background-image: -ms-linear-gradient(0deg, #06c6f9 0%, #38eaf9 100%);

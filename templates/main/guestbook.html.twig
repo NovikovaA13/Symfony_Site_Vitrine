@@ -1,11 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Solution - Free Responsive Agency Template using Bootstrap 4{% endblock %}
+{% block title %}Guestbook{% endblock %}
 
 {% block body %}
    <div class="container text-center">
-       <h1 class="mt-4 mb-4"> We promise to bring the best <span>solution</span> for your business. </h1>
-       <image src="{{ asset('build/images/learn-img.jpg') }}"  class="img-fluid"></image>
+       <h1 class="mt-4 mb-4">Guestbook</h1>
         <p class="lead mt-4"> Lorem ipsum dolor sit amet, consctetur adipiscing elit. In rhoncus turpis nisl. </p>
+       <h3>
+           <i class="fa fa-comments" aria-hidden="true"></i> 5 commentaires
+       </h3>
+       {% for contact in contacts %}
+       <div class="row post-comment">
+           <a name="comment_5"></a>
+           <h4 class="col-sm-3">
+               <strong>{{ contact.name }}</strong> comment at
+               <strong>5 déc. 2017 à 17:36</strong>
+           </h4>
+           <div class="col-sm-9">
+               <p>{{ contact.text }}</p>
+           </div>
+       </div>
+       {% endfor %}
    </div>
 {% endblock %}

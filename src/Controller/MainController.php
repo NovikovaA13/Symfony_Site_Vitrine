@@ -42,7 +42,9 @@ class MainController extends AbstractController
      */
     public function guestbook(): Response
     {
-        return $this->render('main/guestbook.html.twig');
+        $contactRepository = $this->getDoctrine()->getRepository(Contact::class);
+        $contacts = $contactRepository->findAll();
+        return $this->render('main/guestbook.html.twig', ['contacts' => $contacts]);
     }
     /**
      * @Route("/services", name="all_services")

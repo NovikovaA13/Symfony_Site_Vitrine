@@ -97,7 +97,7 @@
                     <p> Nunc sodales lobortis arcu, sit amet venenatis erat placerat a. Donec lacinia magna nulla, cursus
                         impediet augue egestas id. Suspendisse dolor lectus, pellentesque quis tincidunt ac, dictum id
                         neque. </p>
-                    <a href="{{ path('all_services') }}">Tous les services <i class="fa fa-angle-right" aria-hidden="true"></i></a></div>
+                    <a href="{{ path('all_services') }}">All services <i class="fa fa-angle-right" aria-hidden="true"></i></a></div>
                 <div class="col-lg-8">
                     <svg id="bg-services"
                          width="100%"
@@ -229,7 +229,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6" id="contact">
-                    <a href="{{ path('guestbook') }}"><i class="fa fa-angle-right" aria-hidden="true"></i> Guestbook</a>
+                    <div class="mt-3 mb-5"><a href="{{ path('guestbook') }}" class="submit-button">GuestBook <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </div>
                     <h4> Contact Us </h4>
                     {% for flashes in app.session.flashbag.all %}
                         {% for message in flashes %}
@@ -243,10 +244,11 @@
                     {{ form_row(form.name, {'attr': {'label': '', 'class': 'form-control'}}) }}
                     {{ form_row(form.email, {'attr': {'label': '', 'class': 'form-control'}}) }}
                     {{ form_row(form.text, {'attr': {'label': '', 'class': 'form-control'}}) }}
-                    <button type="submit" class="submit-button" style="border-color: white;">Save <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                    <button type="submit" class="submit-button">Save <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                     {{ form_end(form) }}
 
-            </div>
+
+                </div>
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-6">
