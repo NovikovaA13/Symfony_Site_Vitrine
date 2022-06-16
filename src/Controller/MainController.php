@@ -11,6 +11,7 @@ use App\Entity\Contact;
 use App\Entity\Stats;
 use App\Entity\Post;
 use App\Form\ContactType;
+use Knp\Component\Pager\PaginatorInterface;
 
 
 class MainController extends AbstractController
@@ -40,11 +41,18 @@ class MainController extends AbstractController
     /**
      * @Route("/guestbook", name="guestbook")
      */
-    public function guestbook(): Response
+    public function guestbook(Request $request, PaginatorInterface $paginator): Response
     {
         $contactRepository = $this->getDoctrine()->getRepository(Contact::class);
-        $contacts = $contactRepository->findBy([], ['id' => 'DESC']);;
-        return $this->render('main/guestbook.html.twig', ['contacts' => $contacts]);
+        $data = $contactRepository->findBy([], ['id' => 'DESC']);
+        $contacts = $paginator->paginate($data, $request->query->getInt('page', 1), 7);
+        $total = count($data);
+        $contacts->setCustomParameters([
+            'align' => 'center', # center|right (for template: twitter_bootstrap_v4_pagination and foundation_v6_pagination)
+            'style' => 'bottom',
+            'span_class' => 'whatever',
+        ]);
+        return $this->render('main/guestbook.html.twig', ['contacts' => $contacts, 'total' => $total]);
     }
     /**
      * @Route("/services", name="all_services")

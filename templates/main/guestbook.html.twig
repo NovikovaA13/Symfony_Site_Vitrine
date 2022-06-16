@@ -9,7 +9,7 @@
 </div>
 <div class="container text-center">
        <h3>
-           <i class="fa fa-comments" aria-hidden="true"></i> {{ contacts|length }} comments
+           <i class="fa fa-comments" aria-hidden="true"></i> {{ total }} comments
        </h3>
        {% for contact in contacts %}
        <div class="row post-comment">
@@ -23,5 +23,10 @@
            </div>
        </div>
        {% endfor %}
-   </div>
+</div>
+    <div>
+        {{ knp_pagination_render(contacts) }}
+    </div>
+</div>
+
 {% endblock %}
