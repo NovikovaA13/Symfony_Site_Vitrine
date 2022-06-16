@@ -176,9 +176,8 @@ class AdminController extends AbstractController
         return $this->render('admin/add_post.html.twig', ['form' => $form->createView()]);
 
     }
-    //admin_edit_post
     /**
-     * @Route("admin/edit_service/{id}", name="admin_edit_post")
+     * @Route("admin/edit_post/{id}", name="admin_edit_post")
      */
     public function post_edit(Request $request, int $id)
     {

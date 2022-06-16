@@ -801,3 +801,6 @@ body {
 .child {
   width: 45%;
 }
+button.submit-button{
+  border: 1px solid white;
+}

@@ -38,6 +38,13 @@ class MainController extends AbstractController
         return $this->render('main/about.html.twig');
     }
     /**
+     * @Route("/guestbook", name="guestbook")
+     */
+    public function guestbook(): Response
+    {
+        return $this->render('main/guestbook.html.twig');
+    }
+    /**
      * @Route("/services", name="all_services")
      */
     public function services(): Response
@@ -58,7 +65,8 @@ class MainController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();
-            $this->addFlash('success', 'Votre message a été bien enregistré');
+            $this->addFlash('success', 'your message has been saved
+');
             return $this->redirectToRoute('index');
         }
 
