@@ -22,10 +22,10 @@ class MainController extends AbstractController
     {
         $serviceRepository = $this->getDoctrine()->getRepository(Service::class);
         $postRepository = $this->getDoctrine()->getRepository(Post::class);
-        $posts = $postRepository->findAll();
+        $posts = $postRepository->findBy([], ['id' => 'DESC']);
         $services = $serviceRepository->findBy([], ['id' => 'DESC'], 4);
         $statRepository = $this->getDoctrine()->getRepository(Stats::class);
-        $stats = $statRepository->findAll();
+        $stats = $statRepository->findBy([], ['id' => 'DESC']);
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact, ['action' => $this->generateUrl('save_contact'), 'method' => 'POST']);
         return $this->render('main/index.html.twig', ['services' => $services, 'posts' => $posts, 'stats' => $stats, 'form' => $form->createView()]);
@@ -43,7 +43,7 @@ class MainController extends AbstractController
     public function guestbook(): Response
     {
         $contactRepository = $this->getDoctrine()->getRepository(Contact::class);
-        $contacts = $contactRepository->findAll();
+        $contacts = $contactRepository->findBy([], ['id' => 'DESC']);;
         return $this->render('main/guestbook.html.twig', ['contacts' => $contacts]);
     }
     /**
@@ -52,7 +52,7 @@ class MainController extends AbstractController
     public function services(): Response
     {
         $serviceRepository = $this->getDoctrine()->getRepository(Service::class);
-        $services = $serviceRepository->findAll();
+        $services = $serviceRepository->findBy([], ['id' => 'DESC']);
         return $this->render('main/services.html.twig', ['services' => $services]);
     }
     /**
@@ -67,7 +67,7 @@ class MainController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();
-            $this->addFlash('success', 'your message has been saved
+            $this->addFlash('success', 'Your message has been saved.
 ');
             return $this->redirectToRoute('index');
         }

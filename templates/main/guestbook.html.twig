@@ -3,18 +3,20 @@
 {% block title %}Guestbook{% endblock %}
 
 {% block body %}
-   <div class="container text-center">
-       <h1 class="mt-4 mb-4">Guestbook</h1>
-        <p class="lead mt-4"> Lorem ipsum dolor sit amet, consctetur adipiscing elit. In rhoncus turpis nisl. </p>
+<div class="container-fluid gtco-banner-area">
+    <h1 class="mt-4 mb-4">Guestbook</h1>
+    <p class="lead mt-4">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>
+</div>
+<div class="container text-center">
        <h3>
-           <i class="fa fa-comments" aria-hidden="true"></i> 5 commentaires
+           <i class="fa fa-comments" aria-hidden="true"></i> {{ contacts|length }} comments
        </h3>
        {% for contact in contacts %}
        <div class="row post-comment">
            <a name="comment_5"></a>
            <h4 class="col-sm-3">
-               <strong>{{ contact.name }}</strong> comment at
-               <strong>5 déc. 2017 à 17:36</strong>
+               <strong><i class="fa fa-user" aria-hidden="true"></i> {{ contact.name }}</strong> comment at
+               <strong><i class="fa fa-calendar" aria-hidden="true"></i> {{ contact.getCreatedAt|date('d-m-Y')}}</strong>
            </h4>
            <div class="col-sm-9">
                <p>{{ contact.text }}</p>
