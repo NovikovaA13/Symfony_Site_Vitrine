@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\Post;
 use App\Entity\Service;
 use App\Entity\Stats;
+use App\Form\PostType;
 use App\Form\ServiceType;
 use App\Form\StatsType;
 use App\Service\ImageUploader;
@@ -140,6 +142,74 @@ class AdminController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('admin_contacts_view');
     }
+    /**
+     * @Route("/admin/posts", name="admin_posts")
+     */
+    public function posts(): Response
+    {
+        $em = $this->getDoctrine()->getRepository(Post::class);
+        $posts = $em->findAll();
+        return $this->render('admin/posts.html.twig',
+            ['posts' => $posts]
+        );
+    }
+    /**
+     * @Route("/admin/post_add", name="admin_add_post")
+     */
+    public function post_add(Request $request): Response
+    {
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $newFilename = ImageUploader::upload($imageFile, $this->getParameter('images_directory'));
+                $post->setImage($newFilename);
 
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+            return $this->redirectToRoute('admin_posts');
+        }
+        return $this->render('admin/add_post.html.twig', ['form' => $form->createView()]);
 
+    }
+    //admin_edit_post
+    /**
+     * @Route("admin/edit_service/{id}", name="admin_edit_post")
+     */
+    public function post_edit(Request $request, int $id)
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $newFilename = ImageUploader::upload($imageFile, $this->getParameter('images_directory'));
+                $post->setImage($newFilename);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+            return $this->redirectToRoute('admin_posts');
+        }
+        return $this->render('admin/edit_post.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/admin/post_delete/{id}", name="admin_post_delete")
+     */
+    public function post_delete(int $id): Response
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        ImageUploader::delete($post->getImage());
+        $em->remove($post);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_posts');
+    }
 }

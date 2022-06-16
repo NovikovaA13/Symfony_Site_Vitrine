@@ -1,11 +1,11 @@
 {% extends 'adminbase.html.twig' %}
 
-{% block title %}Add Service{% endblock %}
+{% block title %}Edit Post{% endblock %}
 
 {% block body %}
 
     <div class="container">
-        <div class="page-header text-center mt-3 mb-4"><h1>Add Service</h1>
+        <div class="page-header text-center mt-3 mb-4"><h1>Edit Post</h1>
         </div>
         <div>
             {{ form_start(form) }}
@@ -13,7 +13,7 @@
             {{ form_row(form.title) }}
             {{ form_row(form.text) }}
             {{ form_row(form.image) }}
-            <button class="btn btn-success" type="submit">Add</button>
+            <button class="btn btn-success" type="submit">Modify</button>
             {{ form_end(form) }}
         </div>
     </div>

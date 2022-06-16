@@ -1,14 +1,14 @@
 {% extends 'adminbase.html.twig' %}
 
-{% block title %}Tous les services{% endblock %}
+{% block title %}Admin All services{% endblock %}
 
 {% block body %}
     <main role="main">
         <section class="jumbotron text-center">
             <div class="container">
-                <h1 class="jumbotron-heading">Tous les services</h1>
-                <a href={{ path('admin_add_service') }} class="btn btn-secondary">
-                    Ajouter une nouvelle service
+                <h1 class="jumbotron-heading">All services</h1>
+                <a href="{{ path('admin_add_service') }}" class="btn btn-secondary">
+                   Add new service
                 </a>
             </div>
         </section>
@@ -23,8 +23,8 @@
                             <div class="card-body">
                                 <h3 class="card-title">{{ service.title }}</h3>
                                 <p class="card-text">{{ service.text }}</p>
-                                <a href="{{ path('admin_edit_service', {'id': service.id })}}" class="btn btn-warning">Modifier</a>
-                                <a href="{{ path('admin_service_delete', {'id': service.id })}}" class="btn btn-danger">Supprimer</a>
+                                <a href="{{ path('admin_edit_service', {'id': service.id })}}" class="btn btn-warning">Modify</a>
+                                <a href="{{ path('admin_service_delete', {'id': service.id })}}" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     {% endfor %}

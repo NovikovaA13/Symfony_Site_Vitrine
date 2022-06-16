@@ -1,0 +1,36 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Admin All posts{% endblock %}
+
+{% block body %}
+    <main role="main">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">All posts</h1>
+                <a href="{{ path('admin_add_post') }}" class="btn btn-secondary">
+                    Add new post
+                </a>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="row">
+                <div class="card-group">
+                    {% for post in posts %}
+                        {% set path = 'build/images/'~ post.image %}
+                        <div class="card text-center" >
+                            <div class="oval"><img class="img-thumbnail" src="{{ asset(path) }}" alt=""></div>
+                            <div class="card-body">
+                                <h3 class="card-title">{{ post.title }}</h3>
+                                <p class="card-text">{{ post.text }}</p>
+                                <a href="{{ path('admin_edit_post', {'id': post.id })}}" class="btn btn-warning">Modify</a>
+                                <a href="{{ path('admin_post_delete', {'id': post.id })}}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </main>
+{% endblock %}

@@ -12,8 +12,8 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nom</th>
-                <th scope="col">Quantité</th>
-                <th scope="col">Modifier</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Modify</th>
             </tr>
             </thead>
         {% for stat in stats %}
@@ -21,7 +21,7 @@
                     <td >{{ stat.id }}</td>
                     <td>{{ stat.title }}</td>
                     <td>{{ stat.quantity }}</td>
-                    <td><a href="{{ path('admin_stat_edit', {'id': stat.id }) }}" class="link-warning">Modifier</a></td>
+                    <td><a href="{{ path('admin_stat_edit', {'id': stat.id }) }}" class="link-warning">Modify</a></td>
                 </tr>
         {% endfor %}
         </table>
