@@ -121,13 +121,13 @@ class AdminController extends AbstractController
         );
     }
     /**
-     * @Route("/admin/contacts", name="admin_contacts_view")
+     * @Route("/admin/guestbook", name="admin_contacts_view")
      */
     public function contacts(): Response
     {
        $em = $this->getDoctrine()->getRepository(Contact::class);
-       $contacts = $em->findAll();
-        return $this->render('admin/contacts.html.twig',
+       $contacts = $em->findBy([], ['id' => 'DESC']);
+        return $this->render('admin/guestbook.html.twig',
             ['contacts' => $contacts]
         );
     }

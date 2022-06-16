@@ -1,11 +1,11 @@
 {% extends 'adminbase.html.twig' %}
 
-{% block title %}Contacts{% endblock %}
+{% block title %}Guestbook{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="page-header text-center mt-3 mb-4">
-            <h1>Contacts</h1>
+            <h1>Guestbook</h1>
         </div>
         <div class="list-group mb-4">
             <table class="table table-striped">
@@ -15,7 +15,8 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Email</th>
                     <th scope="col">Text</th>
-                    <th scope="col">Supprimer</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Delete</th>
                 </tr>
                 </thead>
                 {% for contact in contacts %}
@@ -24,7 +25,8 @@
                         <td>{{ contact.name }}</td>
                         <td>{{ contact.email }}</td>
                         <td>{{ contact.text }}</td>
-                        <td><a href={{ path('admin_contact_delete', {'id': contact.id }) }} class="link-danger">Supprimer</a></td>
+                        <td>{{ contact.getCreatedAt|date('d-m-Y')}}</td>
+                        <td><a href={{ path('admin_contact_delete', {'id': contact.id }) }} class="link-danger">Delete</a></td>
                     </tr>
                 {% endfor %}
             </table>
