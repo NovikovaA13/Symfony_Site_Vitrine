@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 16 juin 2022 à 14:12
+-- Généré le : lun. 20 juin 2022 à 14:58
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -24,27 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `contact`
+-- Structure de la table `comment`
 --
 
-DROP TABLE IF EXISTS `contact`;
-CREATE TABLE IF NOT EXISTS `contact` (
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `text` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `contact`
+-- Déchargement des données de la table `comment`
 --
 
-INSERT INTO `contact` (`id`, `name`, `email`, `text`, `created_at`) VALUES
+INSERT INTO `comment` (`id`, `name`, `email`, `text`, `created_at`) VALUES
 (1, 'name', 'novikova.a13@gmail.com', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2022-05-02 15:45:48'),
-(2, 'My Name', 'novikova_a@yahoo.fr', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2022-05-09 15:45:57'),
-(3, 'My Name', 'novikova_a@yahoo.fr', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2022-06-05 15:46:09'),
 (4, 'My Name', 'novikova_a@yahoo.fr', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2022-06-01 15:46:17'),
 (5, 'My Name', 'novikova_a@yahoo.fr', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2022-06-02 15:46:34'),
 (6, 'My Name', 'novikova_a@yahoo.fr', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2022-06-04 15:46:42'),
@@ -52,7 +50,10 @@ INSERT INTO `contact` (`id`, `name`, `email`, `text`, `created_at`) VALUES
 (9, 'My Name', 'novikova_a@yahoo.fr', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2022-06-07 15:46:58'),
 (10, 'My Name', 'novikova.a13@gmail.com', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2022-06-02 15:47:06'),
 (11, 'My Name', 'novikova.a13@gmail.com', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2022-06-12 15:47:12'),
-(12, 'Martin', 'matrin@gmail.com', 'Aliquam a nisl pulvinar, hendrerit arcu sed, dapibus velit. Duis ac quam id sapien vestibulum fermentum ac eu eros. Aliquam erat volutpat.', NULL);
+(12, 'Martin', 'matrin@gmail.com', 'Aliquam a nisl pulvinar, hendrerit arcu sed, dapibus velit. Duis ac quam id sapien vestibulum fermentum ac eu eros. Aliquam erat volutpat.', NULL),
+(14, 'Kate', 'kate123@yahoo.fr', 'Mon text', NULL),
+(15, 'David', 'david1234@gmail.com', 'Mon text', NULL),
+(17, 'Serge', 'serge1234@gmail.com', 'Aliquam a nisl pulvinar, hendrerit arcu sed, dapibus velit.', NULL);
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `text` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `post`
@@ -115,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `service` (
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `text` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `service`
@@ -126,7 +127,7 @@ INSERT INTO `service` (`id`, `image`, `title`, `text`) VALUES
 (2, 'seo.png', 'SEO', 'Nullam quis libero in lorem accumsan sodales. Nam vel nisi eget.'),
 (3, 'marketing.png', 'Marketing', 'Graphics Design\r\nNullam quis libero in lorem accumsan sodales. Nam vel nisi eget.'),
 (4, 'graphics-design.png', 'Graphics Design', 'Nullam quis libero in lorem accumsan sodales. Nam vel nisi eget.'),
-(17, 'analitics-62aa2f9e8090f.png', 'Analytic', 'Google Analytics lets you measure your advertising ROI as well as track your Flash, video, and social networking sites and applications.'),
+(17, 'analitics-62ab71e26331c.png', 'Analytic', 'Google Analytics lets you measure your advertising ROI as well as track your Flash, video, and social networking sites and applications.'),
 (18, 'designgr-62aa30b997987.jpeg', 'Graphics Design', 'Graphic design is a craft where professionals create visual content to communicate messages. By applying visual hierarchy and page layout techniques, ...');
 
 -- --------------------------------------------------------
@@ -148,10 +149,10 @@ CREATE TABLE IF NOT EXISTS `stats` (
 --
 
 INSERT INTO `stats` (`id`, `title`, `quantity`) VALUES
-(1, 'Active Projects', 125),
+(1, 'Active Projects', 127),
 (2, 'Business Growth', 200),
 (3, 'Completed Projects', 530),
-(4, 'Happy Clients', 941);
+(4, 'Happy Clients', 943);
 
 -- --------------------------------------------------------
 

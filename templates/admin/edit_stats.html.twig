@@ -1,12 +1,12 @@
 {% extends 'adminbase.html.twig' %}
 
-{% block title %}Edit{% endblock %}
+{% block title %}Edit {{ name }}{% endblock %}
 
 {% block body %}
 
 <div class="container">
     <div class="page-header text-center mt-3 mb-4">
-        <h1>Edit</h1>
+        <h1>Edit {{ name }}</h1>
     </div>
     <div>
         {{ form_start(form) }}

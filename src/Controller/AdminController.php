@@ -10,13 +10,13 @@ use App\Form\PostType;
 use App\Form\ServiceType;
 use App\Form\StatsType;
 use App\Service\ImageUploader;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\AdminAbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends AbstractController
+class AdminController extends AdminAbstractController
 {
     /**
      * @Route("/admin/", name="admin_main")
@@ -38,47 +38,24 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("admin/add_service", name="admin_add_service")
+     * @Route("/admin/add_service", name="admin_add_service")
      */
     public function service_add(Request $request)
     {
         $service = new Service();
         $form = $this->createForm(ServiceType::class, $service);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $newFilename = ImageUploader::upload($imageFile, $this->getParameter('images_directory'));
-                $service->setImage($newFilename);
 
-            }
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($service);
-            $em->flush();
-            return $this->redirectToRoute('admin_services');
-        }
-        return $this->render('admin/add_service.html.twig', ['form' => $form->createView()]);
+        return parent::add($request, $service, $form, 'admin_services');
     }
     /**
-     * @Route("admin/edit_service/{id}", name="admin_edit_service")
+     * @Route("/admin/edit_service/{id}", name="admin_edit_service")
      */
     public function service_edit(Request $request, int $id)
     {
         $service = $this->getDoctrine()->getRepository(Service::class)->find($id);
         $form = $this->createForm(ServiceType::class, $service);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $newFilename = ImageUploader::upload($imageFile, $this->getParameter('images_directory'));
-                $service->setImage($newFilename);
-            }
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($service);
-            $em->flush();
-            return $this->redirectToRoute('admin_services');
-        }
-        return $this->render('admin/edit_service.html.twig', ['form' => $form->createView()]);
+        return parent::edit($request, $service, $form, 'admin_services', true);
+
     }
     /**
      * @Route("/admin/service_delete/{id}", name="admin_service_delete")
@@ -86,28 +63,17 @@ class AdminController extends AbstractController
     public function service_delete(int $id): Response
     {
         $service = $this->getDoctrine()->getRepository(Service::class)->find($id);
-        $em = $this->getDoctrine()->getManager();
-        ImageUploader::delete($service->getImage());
-
-        $em->remove($service);
-        $em->flush();
-
-        return $this->redirectToRoute('admin_services');
+        return parent::delete($service, 'admin_services', true);
     }
     /**
      * @Route("/admin/stat_edit/{id}", name="admin_stat_edit")
      */
     public function stat_edit(Request $request, int $id): Response
     {
-       $em = $this->getDoctrine()->getRepository(Stats::class);
-       $stats = $em->find($id);
-       $form = $this->createForm(StatsType::class, $stats);
-       $form->handleRequest($request);
-       if ($form->isSubmitted() && $form->isValid()) {
-           $em = $this->getDoctrine()->getManager();
-           $em->flush();
-       }
-       return $this->render('admin/stats_edit.html.twig', ['form' => $form->createView()]);
+       $stat = $this->getDoctrine()->getRepository(Stats::class)->find($id);
+       $form = $this->createForm(StatsType::class, $stat);
+        return parent::edit($request, $stat, $form, 'admin_stats_view', false);
+
     }
     /**
      * @Route("/admin/stats", name="admin_stats_view")
@@ -137,10 +103,8 @@ class AdminController extends AbstractController
     public function comment_delete(int $id): Response
     {
         $comment = $this->getDoctrine()->getRepository(Comment::class)->find($id);
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($comment);
-        $em->flush();
-        return $this->redirectToRoute('admin_comments_view');
+        return parent::delete($comment, 'admin_comments_view', false);
+
     }
     /**
      * @Route("/admin/posts", name="admin_posts")
@@ -160,20 +124,7 @@ class AdminController extends AbstractController
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $newFilename = ImageUploader::upload($imageFile, $this->getParameter('images_directory'));
-                $post->setImage($newFilename);
-
-            }
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
-            $em->flush();
-            return $this->redirectToRoute('admin_posts');
-        }
-        return $this->render('admin/add_post.html.twig', ['form' => $form->createView()]);
+        return parent::add($request, $post, $form, 'admin_posts');
 
     }
     /**
@@ -183,19 +134,7 @@ class AdminController extends AbstractController
     {
         $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
         $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $newFilename = ImageUploader::upload($imageFile, $this->getParameter('images_directory'));
-                $post->setImage($newFilename);
-            }
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
-            $em->flush();
-            return $this->redirectToRoute('admin_posts');
-        }
-        return $this->render('admin/edit_post.html.twig', ['form' => $form->createView()]);
+        return parent::edit($request, $post, $form, 'admin_posts', true);
     }
 
     /**
@@ -204,11 +143,7 @@ class AdminController extends AbstractController
     public function post_delete(int $id): Response
     {
         $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
-        $em = $this->getDoctrine()->getManager();
-        ImageUploader::delete($post->getImage());
-        $em->remove($post);
-        $em->flush();
+        return parent::delete($post, 'admin_posts', true);
 
-        return $this->redirectToRoute('admin_posts');
     }
 }

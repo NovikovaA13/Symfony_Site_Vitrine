@@ -1,11 +1,11 @@
 {% extends 'adminbase.html.twig' %}
 
-{% block title %}Add Service{% endblock %}
+{% block title %}Add {{ name }}{% endblock %}
 
 {% block body %}
 
     <div class="container">
-        <div class="page-header text-center mt-3 mb-4"><h1>Add Service</h1>
+        <div class="page-header text-center mt-3 mb-4"><h1>Add {{ name }}</h1>
         </div>
         <div>
             {{ form_start(form) }}

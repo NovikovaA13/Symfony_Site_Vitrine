@@ -1,5 +1,5 @@
-.env
-.env.test
+/.env
+/.env.test
 src/.idea/*
 /.idea/*
 ###> symfony/framework-bundle ###
