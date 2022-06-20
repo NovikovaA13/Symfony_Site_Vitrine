@@ -11,20 +11,20 @@
        <h3>
            <i class="fa fa-comments" aria-hidden="true"></i> {{ total }} comments
        </h3>
-       {% for contact in contacts %}
+       {% for comment in comments %}
        <div class="row post-comment">
            <h4 class="col-sm-5">
-               <strong><i class="fa fa-user" aria-hidden="true"></i> {{ contact.name }}</strong> comment at
-               <strong><i class="fa fa-calendar" aria-hidden="true"></i> {{ contact.getCreatedAt|date('d-m-Y')}}</strong>
+               <strong><i class="fa fa-user" aria-hidden="true"></i> {{ comment.name }}</strong> comment at
+               <strong><i class="fa fa-calendar" aria-hidden="true"></i> {{ comment.getCreatedAt|date('d-m-Y')}}</strong>
            </h4>
            <div class="col-sm-7">
-               <p>{{ contact.text }}</p>
+               <p>{{ comment.text }}</p>
            </div>
        </div>
        {% endfor %}
 </div>
     <div>
-        {{ knp_pagination_render(contacts) }}
+        {{ knp_pagination_render(comments) }}
     </div>
 </div>
 

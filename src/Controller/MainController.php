@@ -7,10 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Service;
-use App\Entity\Contact;
+use App\Entity\Comment;
 use App\Entity\Stats;
 use App\Entity\Post;
-use App\Form\ContactType;
+use App\Form\CommentType;
 use Knp\Component\Pager\PaginatorInterface;
 
 
@@ -27,8 +27,8 @@ class MainController extends AbstractController
         $services = $serviceRepository->findBy([], ['id' => 'DESC'], 4);
         $statRepository = $this->getDoctrine()->getRepository(Stats::class);
         $stats = $statRepository->findBy([], ['id' => 'DESC']);
-        $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact, ['action' => $this->generateUrl('save_contact'), 'method' => 'POST']);
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment, ['action' => $this->generateUrl('save_comment'), 'method' => 'POST']);
         return $this->render('main/index.html.twig', ['services' => $services, 'posts' => $posts, 'stats' => $stats, 'form' => $form->createView()]);
     }
     /**
@@ -43,16 +43,16 @@ class MainController extends AbstractController
      */
     public function guestbook(Request $request, PaginatorInterface $paginator): Response
     {
-        $contactRepository = $this->getDoctrine()->getRepository(Contact::class);
-        $data = $contactRepository->findBy([], ['id' => 'DESC']);
-        $contacts = $paginator->paginate($data, $request->query->getInt('page', 1), 7);
+        $commentRepository = $this->getDoctrine()->getRepository(Comment::class);
+        $data = $commentRepository->findBy([], ['id' => 'DESC']);
+        $comments = $paginator->paginate($data, $request->query->getInt('page', 1), 7);
         $total = count($data);
-        $contacts->setCustomParameters([
+        $comments->setCustomParameters([
             'align' => 'center', # center|right (for template: twitter_bootstrap_v4_pagination and foundation_v6_pagination)
             'style' => 'bottom',
             'span_class' => 'whatever',
         ]);
-        return $this->render('main/guestbook.html.twig', ['contacts' => $contacts, 'total' => $total]);
+        return $this->render('main/guestbook.html.twig', ['comments' =>$comments, 'total' => $total]);
     }
     /**
      * @Route("/services", name="all_services")
@@ -64,20 +64,19 @@ class MainController extends AbstractController
         return $this->render('main/services.html.twig', ['services' => $services]);
     }
     /**
-     * @Route("/save_contact", name="save_contact")
+     * @Route("/save_comment", name="save_comment")
      */
-    public function saveContact(Request $request): Response
+    public function saveComment(Request $request): Response
     {
-        $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact);
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $em = $this->getDoctrine()->getManager();
-            $em->persist($contact);
+            $em->persist($comment);
             $em->flush();
-            $this->addFlash('success', 'Your message has been saved.
-');
-            return $this->redirectToRoute('index');
+            $this->addFlash('success', 'Your comment has been saved.');
+            return $this->redirectToRoute('index', ['_fragment' => 'contact']);
         }
 
         return $this->redirectToRoute('index');

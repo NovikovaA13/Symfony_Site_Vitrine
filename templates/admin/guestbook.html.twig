@@ -19,14 +19,14 @@
                     <th scope="col">Delete</th>
                 </tr>
                 </thead>
-                {% for contact in contacts %}
+                {% for comment in comments %}
                     <tr>
-                        <td>{{ contact.id }}</td>
-                        <td>{{ contact.name }}</td>
-                        <td>{{ contact.email }}</td>
-                        <td>{{ contact.text }}</td>
-                        <td>{{ contact.getCreatedAt|date('d-m-Y')}}</td>
-                        <td><a href={{ path('admin_contact_delete', {'id': contact.id }) }} class="link-danger">Delete</a></td>
+                        <td>{{ comment.id }}</td>
+                        <td>{{ comment.name }}</td>
+                        <td>{{ comment.email }}</td>
+                        <td>{{ comment.text }}</td>
+                        <td>{{ comment.getCreatedAt|date('d-m-Y')}}</td>
+                        <td><a href={{ path('admin_comment_delete', {'id': comment.id }) }} class="link-danger">Delete</a></td>
                     </tr>
                 {% endfor %}
             </table>

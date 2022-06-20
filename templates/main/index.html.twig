@@ -216,7 +216,7 @@
                             </div>
                         {% endfor %}
                     {% endfor %}
-                    {{ form_start(form, {'attr': {'id': 'contact'}}) }}
+                    {{ form_start(form) }}
                     {{ form_errors(form, {'attr': {'label': '', 'class': 'alert alert-danger'}}) }}
                     {{ form_row(form.name, {'attr': {'label': '', 'class': 'form-control'}}) }}
                     {{ form_row(form.email, {'attr': {'label': '', 'class': 'form-control'}}) }}

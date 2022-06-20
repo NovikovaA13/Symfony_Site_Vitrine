@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Contact;
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\Service;
 use App\Entity\Stats;
@@ -121,26 +121,26 @@ class AdminController extends AbstractController
         );
     }
     /**
-     * @Route("/admin/guestbook", name="admin_contacts_view")
+     * @Route("/admin/guestbook", name="admin_comments_view")
      */
-    public function contacts(): Response
+    public function comments(): Response
     {
-       $em = $this->getDoctrine()->getRepository(Contact::class);
-       $contacts = $em->findBy([], ['id' => 'DESC']);
+       $em = $this->getDoctrine()->getRepository(Comment::class);
+       $comments = $em->findBy([], ['id' => 'DESC']);
         return $this->render('admin/guestbook.html.twig',
-            ['contacts' => $contacts]
+            ['comments' => $comments]
         );
     }
     /**
-     * @Route("/admin/contact_delete/{id}", name="admin_contact_delete")
+     * @Route("/admin/comment_delete/{id}", name="admin_comment_delete")
      */
-    public function contact_delete(int $id): Response
+    public function comment_delete(int $id): Response
     {
-        $contact = $this->getDoctrine()->getRepository(Contact::class)->find($id);
+        $comment = $this->getDoctrine()->getRepository(Comment::class)->find($id);
         $em = $this->getDoctrine()->getManager();
-        $em->remove($contact);
+        $em->remove($comment);
         $em->flush();
-        return $this->redirectToRoute('admin_contacts_view');
+        return $this->redirectToRoute('admin_comments_view');
     }
     /**
      * @Route("/admin/posts", name="admin_posts")
